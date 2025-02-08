@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import os
 import cv2
 import numpy as np
 import base64
@@ -52,4 +53,5 @@ def recognize():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000,debug=True)
+    port = int(os.environ.get("PORT", 5000))  # ✅ Dynamic port for Railway
+    app.run(host="0.0.0.0", port=port)
